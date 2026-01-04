@@ -25,8 +25,12 @@ public class TicketService {
         return ticketRepository.findByUser(user);
     }
 
-    public Optional<Ticket> findById(Long id) {
-        return ticketRepository.findById(id);
+//    public Optional<Ticket> findById(Long id) {
+ //      return ticketRepository.findById(id);
+ //  }
+
+    public Ticket findById(Long id) {
+        return ticketRepository.findById(id).orElseThrow();
     }
 
     public Ticket save(Ticket ticket) {

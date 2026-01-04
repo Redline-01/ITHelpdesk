@@ -19,12 +19,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/")
 public class AuthController {
 
     private final UserRepository userRepository;
@@ -47,9 +45,9 @@ public class AuthController {
     public String loginForm(Authentication authentication,Model model,
                             @RequestParam(value = "logout", required = false) String logout) {
 
-        if (authentication != null && authentication.isAuthenticated()) {
-            return "redirect:/app/dashboard";
-        }
+       if (authentication != null && authentication.isAuthenticated()) {
+           return "redirect:/app/ticket/index";
+       }
         model.addAttribute("loginRequest", new LoginRequest());
 
         if (logout != null) {

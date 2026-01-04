@@ -40,7 +40,8 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/app/dashboard", true)
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/app/ticket/index", true)
                         .permitAll()
                 )
                 .logout(logout -> logout.permitAll()

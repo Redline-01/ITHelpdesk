@@ -15,6 +15,13 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
     List<Ticket> findByCategory(String category);
 
+    List<Ticket> findByUserUsername(String username);
+
+    long countByStatus(String status);
+
+    List<Ticket> findByTitleContainingIgnoreCaseAndStatus(String title, String status);
+
+
     @Query("SELECT t.status, COUNT(t) FROM Ticket t GROUP BY t.status")
     List<Object[]> countTicketsByStatus();
 

@@ -1,5 +1,6 @@
 package com.example.helpdesk.entities;
 
+import com.example.helpdesk.enums.Priority;
 import com.example.helpdesk.validations.ValidTicketStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -9,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -40,9 +40,14 @@ public class Ticket {
     @Column(nullable = false)
     private String status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Priority priority;
+
 
 
 

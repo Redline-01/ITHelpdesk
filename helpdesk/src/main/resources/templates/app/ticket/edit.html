@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create Ticket</title>
+    <title>Edit Ticket</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
 <div class="container mt-5">
     <div class="card mx-auto" style="max-width: 600px;">
         <div class="card-body">
-            <h3 class="card-title mb-4">Create Ticket</h3>
+            <h3 class="card-title mb-4">Edit Ticket</h3>
 
-            <form th:action="@{/app/tickets/create}" th:object="${ticket}" method="post">
+            <form th:action="@{/app/ticket/{id}/edit(id=${ticket.id})}" th:object="${ticket}" method="post">
 
                 <div class="mb-3">
                     <label>Title</label>
@@ -30,8 +30,17 @@
                     <div class="text-danger" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Create Ticket</button>
-                <a th:href="@{/app/tickets}" class="btn btn-secondary">Cancel</a>
+                <div class="mb-3" th:if="${ticket.user.role.name == 'ROLE_ADMIN'}">
+                    <label>Status</label>
+                    <select th:field="*{status}" class="form-control">
+                        <option value="OPEN">OPEN</option>
+                        <option value="IN_PROGRESS">IN_PROGRESS</option>
+                        <option value="CLOSED">CLOSED</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a th:href="@{/app/ticket/index}" class="btn btn-secondary">Cancel</a>
             </form>
         </div>
     </div>

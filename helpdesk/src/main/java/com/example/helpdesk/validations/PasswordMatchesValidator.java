@@ -9,7 +9,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
     @Override
     public boolean isValid(RegisterRequest dto, ConstraintValidatorContext context){
         if (dto.getPassword() == null || dto.getConfirmPassword() == null) {
-            return true; // Let @NotBlank handle null or empty cases
+            return true;
         }
         return dto.getPassword().equals(dto.getConfirmPassword());
     }
